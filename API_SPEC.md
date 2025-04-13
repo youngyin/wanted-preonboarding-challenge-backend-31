@@ -956,11 +956,11 @@ Authorization: Bearer {token}
 
 ## 메인 페이지 API
 
-### 메인 페이지 상품 목록 조회
+### 메인 페이지 상품 및 카테고리 목록 조회
 
 **GET /api/main**
 
-메인 페이지용 상품 목록을 조회합니다.
+메인 페이지용 상품 및 카테고리 목록을 조회합니다.
 
 **응답 모델 (성공 - 200 OK)**
 ```json
@@ -1010,51 +1010,6 @@ Authorization: Bearer {token}
        "created_at": "2025-02-15T14:30:00Z"
      },
      // ... 추가 인기 상품
-   ],
-   "promotional_products": [
-     {
-       "id": 95,
-       "name": "디자이너 식탁 세트",
-       "slug": "designer-dining-set",
-       "short_description": "모던한 디자인의 식탁 세트",
-       "base_price": 1200000,
-       "sale_price": 899000,
-       "currency": "KRW",
-       "discount_percentage": 25,
-       "primary_image": {
-         "url": "https://example.com/images/dining1.jpg",
-         "alt_text": "디자이너 식탁 세트"
-       },
-       "brand": {
-         "id": 4,
-         "name": "디자인하우스"
-       },
-       "rating": 4.6,
-       "created_at": "2025-03-05T11:45:00Z"
-     },
-     // ... 추가 프로모션 상품
-   ],
-   "recommended_products": [
-     {
-       "id": 130,
-       "name": "메모리폼 매트리스",
-       "slug": "memory-foam-mattress",
-       "short_description": "완벽한 수면을 위한 메모리폼 매트리스",
-       "base_price": 890000,
-       "sale_price": 690000,
-       "currency": "KRW",
-       "primary_image": {
-         "url": "https://example.com/images/mattress1.jpg",
-         "alt_text": "메모리폼 매트리스"
-       },
-       "brand": {
-         "id": 6,
-         "name": "슬립웰"
-       },
-       "rating": 4.8,
-       "created_at": "2025-03-20T16:30:00Z"
-     },
-     // ... 추가 추천 상품
    ],
    "featured_categories": [
      {
