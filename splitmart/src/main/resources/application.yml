@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: splitmart
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dbname
+    username: your_user
+    password: your_pass
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
