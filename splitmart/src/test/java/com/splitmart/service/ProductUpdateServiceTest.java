@@ -1,9 +1,15 @@
 
 package com.splitmart.service;
 
-import com.splitmart.command.*;
-import com.splitmart.model.entity.*;
-import com.splitmart.repository.*;
+import com.splitmart.application.command.CreateProductCommand;
+import com.splitmart.application.command.ProductDetailCommand;
+import com.splitmart.application.command.UpdateProductCommand;
+import com.splitmart.application.service.ProductRegisterService;
+import com.splitmart.application.service.ProductUpdateService;
+import com.splitmart.persistence.entity.Brand;
+import com.splitmart.persistence.entity.Product;
+import com.splitmart.persistence.entity.Seller;
+import com.splitmart.persistence.repository.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
