@@ -1,7 +1,9 @@
-package com.splitmart.model;
+package com.splitmart.model.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -12,6 +14,7 @@ import java.util.List;
 @Getter
 @Entity
 @Table(name = "users")
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -34,6 +37,13 @@ public class User {
     private List<Review> reviews = new ArrayList<>();
 
     // Constructors
-    public User() {
+    @Builder
+    public User(Long id, String name, String email, String avatarUrl, LocalDateTime createdAt, List<Review> reviews) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.avatarUrl = avatarUrl;
+        this.createdAt = createdAt;
+        this.reviews = reviews;
     }
 }

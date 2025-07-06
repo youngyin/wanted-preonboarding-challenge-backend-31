@@ -3,10 +3,10 @@ spring:
     name: splitmart
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/dbname
-    username: your_user
-    password: your_pass
+    url: jdbc:postgresql://localhost:5432/splitmart
+    username: splitmart
+    password: splitmart
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: true

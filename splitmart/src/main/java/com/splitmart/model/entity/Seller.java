@@ -1,8 +1,8 @@
-package com.splitmart.model;
+package com.splitmart.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import java.util.List;
 @Table(name = "sellers")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Seller {
 
     @Id
@@ -38,10 +39,23 @@ public class Seller {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    private String status;
+
     @OneToMany(mappedBy = "seller")
     private List<Product> products = new ArrayList<>();
 
     // Constructors
-    public Seller() {
+    @Builder
+    public Seller(Long id, String name, String description, String logoUrl, BigDecimal rating, String contactEmail, String contactPhone, LocalDateTime createdAt, String status, List<Product> products) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.logoUrl = logoUrl;
+        this.rating = rating;
+        this.contactEmail = contactEmail;
+        this.contactPhone = contactPhone;
+        this.createdAt = createdAt;
+        this.status = status;
+        this.products = products;
     }
 }

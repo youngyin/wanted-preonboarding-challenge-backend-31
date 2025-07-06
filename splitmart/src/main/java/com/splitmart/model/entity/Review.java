@@ -1,14 +1,15 @@
-package com.splitmart.model;
+package com.splitmart.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "reviews")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Review {
 
     @Id
@@ -44,6 +45,17 @@ public class Review {
     private Integer helpfulVotes;
 
     // Constructors
-    public Review() {
+    @Builder
+    public Review(Long id, Product product, User user, Integer rating, String title, String content, LocalDateTime createdAt, LocalDateTime updatedAt, Boolean verifiedPurchase, Integer helpfulVotes) {
+        this.id = id;
+        this.product = product;
+        this.user = user;
+        this.rating = rating;
+        this.title = title;
+        this.content = content;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.verifiedPurchase = verifiedPurchase;
+        this.helpfulVotes = helpfulVotes;
     }
 }

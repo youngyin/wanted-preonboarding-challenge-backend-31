@@ -1,8 +1,8 @@
-package com.splitmart.model;
+package com.splitmart.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +10,7 @@ import java.util.List;
 @Table(name = "categories")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Category {
 
     @Id
@@ -38,10 +39,26 @@ public class Category {
     @Column(name = "image_url")
     private String imageUrl;
 
+    private String status;
+    private Long displayOrder;
+
     @OneToMany(mappedBy = "category")
     private List<ProductCategory> productCategories = new ArrayList<>();
 
     // Constructors
-    public Category() {
+
+    @Builder
+    public Category(List<ProductCategory> productCategories, Long displayOrder, String status, String imageUrl, Integer level, List<Category> children, Category parent, String description, String slug, String name, Long id) {
+        this.productCategories = productCategories;
+        this.displayOrder = displayOrder;
+        this.status = status;
+        this.imageUrl = imageUrl;
+        this.level = level;
+        this.children = children;
+        this.parent = parent;
+        this.description = description;
+        this.slug = slug;
+        this.name = name;
+        this.id = id;
     }
 }
