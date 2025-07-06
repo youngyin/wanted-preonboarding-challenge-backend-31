@@ -1,5 +1,8 @@
 package com.splitmart.application.service;
 
+import com.splitmart.adapter.event.ProductEventMapper;
+import com.splitmart.adapter.event.ProductEventPublisher;
+import com.splitmart.adapter.event.model.ProductCreatedEvent;
 import com.splitmart.application.command.CreateProductCommand;
 import com.splitmart.persistence.entity.*;
 import com.splitmart.persistence.repository.*;
@@ -24,6 +27,7 @@ public class ProductRegisterService {
     private final BrandRepository brandRepository;
     private final CategoryRepository categoryRepository;
     private final TagRepository tagRepository;
+    private final ProductEventPublisher eventPublisher;
 
     /**
      * create product
@@ -64,6 +68,10 @@ public class ProductRegisterService {
         
         // 10. 태그 매핑
         saveProductTags(savedProduct, command.getTagIds());
+
+        // 이벤트 발행
+        ProductCreatedEvent event = ProductEventMapper.toCreatedEvent(product);
+        eventPublisher.publishProductCreated(event);
         
         log.info("Product creation completed successfully with id: {}", savedProduct.getId());
         return savedProduct.getId();

@@ -1,12 +1,20 @@
 package com.splitmart.service;
 
-import com.splitmart.command.*;
-import com.splitmart.model.entity.*;
-import com.splitmart.repository.*;
+import com.splitmart.adapter.event.ProductEventPublisher;
+import com.splitmart.application.command.*;
+import com.splitmart.application.service.ProductRegisterService;
+import com.splitmart.persistence.entity.Brand;
+import com.splitmart.persistence.entity.Product;
+import com.splitmart.persistence.entity.Seller;
+import com.splitmart.persistence.repository.BrandRepository;
+import com.splitmart.persistence.repository.ProductPriceRepository;
+import com.splitmart.persistence.repository.ProductRepository;
+import com.splitmart.persistence.repository.SellerRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -24,6 +32,8 @@ class ProductRegisterServiceTest {
     @Autowired private SellerRepository sellerRepository;
     @Autowired private BrandRepository brandRepository;
     @Autowired private ProductPriceRepository productPriceRepository;
+    @MockitoBean
+    private ProductEventPublisher productEventPublisher;
 
     @BeforeEach
     void setUp() {

@@ -1,14 +1,20 @@
 package com.splitmart.service;
 
-import com.splitmart.command.CreateProductCommand;
-import com.splitmart.command.DeleteProductCommand;
-import com.splitmart.model.entity.Brand;
-import com.splitmart.model.entity.Seller;
-import com.splitmart.repository.*;
+import com.splitmart.adapter.event.ProductEventPublisher;
+import com.splitmart.application.command.CreateProductCommand;
+import com.splitmart.application.command.DeleteProductCommand;
+import com.splitmart.application.service.ProductDeleteService;
+import com.splitmart.application.service.ProductRegisterService;
+import com.splitmart.persistence.entity.Brand;
+import com.splitmart.persistence.entity.Seller;
+import com.splitmart.persistence.repository.BrandRepository;
+import com.splitmart.persistence.repository.ProductRepository;
+import com.splitmart.persistence.repository.SellerRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -24,6 +30,7 @@ class ProductDeleteServiceTest {
     @Autowired private ProductRepository productRepository;
     @Autowired private SellerRepository sellerRepository;
     @Autowired private BrandRepository brandRepository;
+    @MockitoBean private ProductEventPublisher productEventPublisher;
 
     private Seller seller;
     private Brand brand;

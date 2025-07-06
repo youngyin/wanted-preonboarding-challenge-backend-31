@@ -1,5 +1,8 @@
 package com.splitmart.application.service;
 
+import com.splitmart.adapter.event.ProductEventMapper;
+import com.splitmart.adapter.event.ProductEventPublisher;
+import com.splitmart.adapter.event.model.ProductDeletedEvent;
 import com.splitmart.application.command.DeleteProductCommand;
 import com.splitmart.persistence.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ProductDeleteService {
     private final ProductRepository productRepository;
+    private final ProductEventPublisher eventPublisher;
 
     @Transactional
     public void deleteProduct(DeleteProductCommand command) {
@@ -24,13 +28,18 @@ public class ProductDeleteService {
         }
 
         // 2. 상품 존재 여부 확인
-        if (!productRepository.existsById(command.getProductId())) {
-            throw new IllegalArgumentException("Product not found with id: " + command.getProductId());
+        Long productId = command.getProductId();
+        if (!productRepository.existsById(productId)) {
+            throw new IllegalArgumentException("Product not found with id: " + productId);
         }
 
         // 4. 상품 삭제
-        productRepository.deleteById(command.getProductId());
+        productRepository.deleteById(productId);
 
-        log.info("Product deletion completed successfully for id: {}", command.getProductId());
+        // 5. event 발행
+        ProductDeletedEvent event = ProductEventMapper.toDeletedEvent(productId);
+        eventPublisher.publishProductDeleted(event);
+
+        log.info("Product deletion completed successfully for id: {}", productId);
     }
 }

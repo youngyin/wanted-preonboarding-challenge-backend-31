@@ -1,10 +1,11 @@
 package com.splitmart.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.splitmart.command.CreateProductCommand;
-import com.splitmart.service.ProductDeleteService;
-import com.splitmart.service.ProductRegisterService;
-import com.splitmart.service.ProductUpdateService;
+import com.splitmart.adapter.controller.ProductCommandController;
+import com.splitmart.application.command.CreateProductCommand;
+import com.splitmart.application.service.ProductDeleteService;
+import com.splitmart.application.service.ProductRegisterService;
+import com.splitmart.application.service.ProductUpdateService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

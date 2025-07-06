@@ -1,6 +1,7 @@
 
 package com.splitmart.service;
 
+import com.splitmart.adapter.event.ProductEventPublisher;
 import com.splitmart.application.command.CreateProductCommand;
 import com.splitmart.application.command.ProductDetailCommand;
 import com.splitmart.application.command.UpdateProductCommand;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -33,6 +35,8 @@ class ProductUpdateServiceTest {
     @Autowired private BrandRepository brandRepository;
     @Autowired private CategoryRepository categoryRepository;
     @Autowired private TagRepository tagRepository;
+    @MockitoBean
+    private ProductEventPublisher productEventPublisher;
 
     private Seller seller;
     private Brand brand;
